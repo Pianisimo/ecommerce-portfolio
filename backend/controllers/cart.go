@@ -3,8 +3,8 @@ package controllers
 /*
 import (
 	"context"
-	"ecommerce/database"
-	"ecommerce/models"
+	"backend/database"
+	"backend/models"
 	"errors"
 	"fmt"
 	"github.com/gin-gonic/gin"

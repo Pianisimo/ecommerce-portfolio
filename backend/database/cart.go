@@ -1,8 +1,8 @@
 package database
 
 import (
+	"backend/models"
 	"context"
-	"ecommerce/models"
 	"errors"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"

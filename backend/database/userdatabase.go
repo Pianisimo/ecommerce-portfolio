@@ -1,7 +1,7 @@
 package database
 
 import (
-	"ecommerce/models"
+	"backend/models"
 	"fmt"
 	"log"
 )

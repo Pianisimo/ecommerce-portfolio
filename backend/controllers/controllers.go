@@ -1,11 +1,11 @@
 package controllers
 
 import (
+	"backend/database"
+	"backend/models"
+	"backend/myJwt"
+	"backend/utils"
 	"context"
-	"ecommerce/database"
-	"ecommerce/models"
-	"ecommerce/myJwt"
-	"ecommerce/utils"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/go-playground/validator/v10"

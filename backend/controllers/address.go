@@ -3,7 +3,7 @@ package controllers
 /*
 import (
 	"context"
-	"ecommerce/models"
+	"backend/models"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"react-go-server.mongodb.org/mongo-driver/bson"

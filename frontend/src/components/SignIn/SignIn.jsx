@@ -2,9 +2,9 @@ import React, {useState} from 'react';
 import './SignIn.scss';
 import FormInput from "../FormInput/FormInput";
 import CustomButton from "../CustomButton/CustomButton";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {logIn} from "../../redux/user.slice";
-import {Snackbar} from "@mui/material";
+import {CircularProgress, Snackbar} from "@mui/material";
 import {SNACKBAR_SHORT_DURATION} from "../../utils/Constants";
 
 const SignIn = () => {
@@ -20,6 +20,8 @@ const SignIn = () => {
         action: false,
         message: '',
     })
+
+    const {loading} = useSelector(state => state.user)
 
     const handleClose = () => {
         setSnackbar({action: false, message: ''});
@@ -38,7 +40,7 @@ const SignIn = () => {
             })
             .catch(reason => setSnackbar({
                 action: true,
-                message: reason.message,
+                message: reason,
             }))
     }
 
@@ -59,7 +61,15 @@ const SignIn = () => {
                            value={password}
                     // required
                            label='password'/>
-                <CustomButton type='submit'> Sign in </CustomButton>
+
+                <div className='buttons'>
+                    {
+                        loading
+                            ? <CircularProgress />
+                            : <CustomButton type='submit'> Sign in </CustomButton>
+                    }
+                </div>
+
             </form>
             <Snackbar
                 open={snackbar.action}

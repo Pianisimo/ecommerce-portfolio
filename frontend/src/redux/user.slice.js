@@ -75,7 +75,7 @@ export const isAuth = createAsyncThunk(
                 return thunkAPI.rejectWithValue(data)
             }
         } catch (e) {
-            return thunkAPI.rejectWithValue(e.response.data)
+            return thunkAPI.rejectWithValue(e.message)
         }
     }
 )
@@ -98,7 +98,7 @@ export const logOut = createAsyncThunk(
                 return thunkAPI.rejectWithValue(data)
             }
         } catch (e) {
-            return thunkAPI.rejectWithValue(e.response.data)
+            return thunkAPI.rejectWithValue(e.message)
         }
 
     }
@@ -124,7 +124,7 @@ export const logIn = createAsyncThunk(
                 return thunkAPI.rejectWithValue(data)
             }
         } catch (e) {
-            return thunkAPI.rejectWithValue(e.response.data)
+            return thunkAPI.rejectWithValue(e.message)
         }
 
     }
@@ -155,7 +155,7 @@ export const signUp = createAsyncThunk(
                 return thunkAPI.rejectWithValue(data)
             }
         } catch (e) {
-            return thunkAPI.rejectWithValue(e.response.data)
+            return thunkAPI.rejectWithValue(e.message)
         }
     }
 )

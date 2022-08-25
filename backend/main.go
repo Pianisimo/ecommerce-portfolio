@@ -1,8 +1,8 @@
 package main
 
 import (
-	"ecommerce/myJwt"
-	"ecommerce/routes"
+	"backend/myJwt"
+	"backend/routes"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
@@ -48,7 +48,10 @@ func initMain() {
 	router := gin.Default()
 
 	router.Use(cors.New(cors.Config{
-		AllowOrigins:     []string{"http://" + frontendURL + ":" + frontendPort},
+		AllowOrigins: []string{
+			"http://" + frontendURL + ":" + frontendPort,
+			"http://localhost:3000", // Always allow origin for development
+		},
 		AllowMethods:     []string{"PUT", "PATCH"},
 		AllowHeaders:     []string{"Origin"},
 		ExposeHeaders:    []string{"Content-Length"},

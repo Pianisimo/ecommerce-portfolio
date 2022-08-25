@@ -3,10 +3,10 @@ import './SignUp.scss';
 
 import FormInput from "../FormInput/FormInput";
 import CustomButton from "../CustomButton/CustomButton";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {signUp} from "../../redux/user.slice";
 import {SNACKBAR_SHORT_DURATION} from "../../utils/Constants";
-import {Snackbar} from "@mui/material";
+import {CircularProgress, Snackbar} from "@mui/material";
 
 const SignUp = () => {
     const dispatch = useDispatch();
@@ -24,6 +24,8 @@ const SignUp = () => {
         action: false,
         message: '',
     })
+
+    const {loading} = useSelector(state => state.user)
 
     const handleClose = () => {
         setSnackbar({action: false, message: ''});
@@ -85,7 +87,13 @@ const SignUp = () => {
                            value={confirmPassword}
                            required
                            label='retype password'/>
-                <CustomButton type='submit'> Sign Up </CustomButton>
+                <div className='buttons'>
+                    {
+                        loading
+                            ? <CircularProgress />
+                            : <CustomButton type='submit'> Sign up </CustomButton>
+                    }
+                </div>
             </form>
             <Snackbar
                 open={snackbar.action}

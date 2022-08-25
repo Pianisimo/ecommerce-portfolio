@@ -1,9 +1,9 @@
 package myJwt
 
 import (
+	"backend/database"
+	"backend/models"
 	"crypto/rsa"
-	"ecommerce/database"
-	"ecommerce/models"
 	"errors"
 	"fmt"
 	"github.com/dgrijalva/jwt-go"

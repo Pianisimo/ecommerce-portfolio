@@ -1,7 +1,7 @@
 package models
 
 import (
-	"ecommerce/utils"
+	"backend/utils"
 	"github.com/dgrijalva/jwt-go"
 	"time"
 )
