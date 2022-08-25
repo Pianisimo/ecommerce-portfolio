@@ -1,0 +1,5 @@
+# Project exclude paths
+/frontend/node_modules/
+/data/
+/frontend/build/
+/react-go-server/build/
