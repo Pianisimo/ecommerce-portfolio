@@ -4,7 +4,7 @@ WORKDIR '/app'
 
 COPY go.mod go.sum main.go ./
 
-RUN react-go-server mod download
+RUN go mod download
 
 COPY . .
 

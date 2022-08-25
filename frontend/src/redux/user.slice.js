@@ -4,6 +4,7 @@ import {BACKEND_URL} from "../index";
 const initialState = {
     currentUser: null,
     shouldFetchAuth: true,
+    loading: false
 }
 
 const userSlice = createSlice({
@@ -13,30 +14,45 @@ const userSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(isAuth.fulfilled, (state, action) => {
-                state.currentUser = action.payload
-                state.shouldFetchAuth = false
+                state.currentUser = action.payload;
+                state.shouldFetchAuth = false;
             })
             .addCase(isAuth.rejected, (state, action) => {
-                state.currentUser = null
-                state.shouldFetchAuth = false
+                state.currentUser = null;
+                state.shouldFetchAuth = false;
             })
             .addCase(logOut.fulfilled, (state, action) => {
-                state.currentUser = null
+                state.currentUser = null;
+                state.loading = false;
             })
             .addCase(logOut.rejected, (state, action) => {
                 state.currentUser = null;
+                state.loading = false;
+            })
+            .addCase(logOut.pending, (state, action) => {
+                state.loading = true;
             })
             .addCase(logIn.fulfilled, (state, action) => {
-                state.currentUser = action.payload
+                state.currentUser = action.payload;
+                state.loading = false;
             })
             .addCase(logIn.rejected, (state, action) => {
-                state.currentUser = null
+                state.currentUser = null;
+                state.loading = false;
+            })
+            .addCase(logIn.pending, (state, action) => {
+                state.loading = true;
             })
             .addCase(signUp.fulfilled, (state, action) => {
-                state.currentUser = action.payload
+                state.currentUser = action.payload;
+                state.loading = false;
             })
             .addCase(signUp.rejected, (state, action) => {
-                state.currentUser = null
+                state.currentUser = null;
+                state.loading = false;
+            })
+            .addCase(signUp.pending, (state, action) => {
+                state.loading = true;
             })
     },
 })
@@ -59,7 +75,7 @@ export const isAuth = createAsyncThunk(
                 return thunkAPI.rejectWithValue(data)
             }
         } catch (e) {
-            return thunkAPI.rejectWithValue(e)
+            return thunkAPI.rejectWithValue(e.response.data)
         }
     }
 )
@@ -82,7 +98,7 @@ export const logOut = createAsyncThunk(
                 return thunkAPI.rejectWithValue(data)
             }
         } catch (e) {
-            return thunkAPI.rejectWithValue(e)
+            return thunkAPI.rejectWithValue(e.response.data)
         }
 
     }
@@ -108,7 +124,7 @@ export const logIn = createAsyncThunk(
                 return thunkAPI.rejectWithValue(data)
             }
         } catch (e) {
-            return thunkAPI.rejectWithValue(e)
+            return thunkAPI.rejectWithValue(e.response.data)
         }
 
     }
@@ -139,7 +155,7 @@ export const signUp = createAsyncThunk(
                 return thunkAPI.rejectWithValue(data)
             }
         } catch (e) {
-            return thunkAPI.rejectWithValue(e)
+            return thunkAPI.rejectWithValue(e.response.data)
         }
     }
 )
