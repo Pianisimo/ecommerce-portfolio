@@ -1,6 +1,7 @@
 package main
 
 import (
+	"backend/middleware"
 	"backend/myJwt"
 	"backend/routes"
 	"github.com/gin-contrib/cors"
@@ -18,7 +19,6 @@ func main() {
 func initMain() {
 	myJwt.InitJWT()
 
-	// Comment below to use env variables coming from a docker-compose.yml
 	err := godotenv.Load(".env")
 	if err != nil {
 		log.Fatal("Error loading .env file")
@@ -63,23 +63,13 @@ func initMain() {
 	}))
 
 	// Setup unauthorized routes
-	routes.UserRoutes(router)
+	routes.PublicRoutes(router)
 
-	/*
-		// Check for authorization
-		router.Use(middleware.Authentication())
+	// Check for authorization
+	router.Use(middleware.Authentication())
 
-		// Setup authorized routes
-		router.GET("/addtocart", app.AddToCart())
-		router.GET("/removeitem", app.RemoveItem())
-		router.GET("/listcart", controllers.GetItemsFromCart())
-		router.POST("/addaddress", controllers.AddAddress())
-		router.PUT("/edithomeaddress", controllers.EditHomeAddress())
-		router.PUT("/editworkaddress", controllers.EditWorkAddress())
-		router.GET("/deleteaddresses", controllers.DeleteAddress())
-		router.GET("/cartcheckout", app.BuyFromCart())
-		router.GET("/instantbuy", app.InstantBuy())
-	*/
+	// Setup authorized routes
+	routes.AuthRoutes(router)
 
 	// Init server API
 	log.Fatal(router.Run(":" + backendPort))

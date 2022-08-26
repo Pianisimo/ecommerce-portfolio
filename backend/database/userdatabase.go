@@ -164,7 +164,6 @@ func StoreUserTokens(id int64, token, refreshToken, csrf string) error {
 					SET token = $2,
 						refresh_token = $3,
 						csrf = $4
-					
 					WHERE id = $1
 					RETURNING id;
 					`
@@ -177,5 +176,49 @@ func StoreUserTokens(id int64, token, refreshToken, csrf string) error {
 	}
 
 	fmt.Println("tokens stored for the user:", id)
+	return nil
+}
+
+func UpdateRefreshToken(id int64, refreshTokenString string) error {
+	db := createConnection()
+	defer db.Close()
+
+	sqlStatement := `
+					UPDATE users
+					SET refresh_token = $2,
+					WHERE id = $1
+					RETURNING id;
+					`
+
+	err := db.QueryRow(sqlStatement, id, refreshTokenString).Scan(&id)
+
+	if err != nil {
+		fmt.Println("unable to store user new refreshToken in database")
+		return err
+	}
+
+	fmt.Println("refreshToken updated the user:", id)
+	return nil
+}
+
+func UpdateAuthToken(id int64, authTokenString string) error {
+	db := createConnection()
+	defer db.Close()
+
+	sqlStatement := `
+					UPDATE users
+					SET token = $2,
+					WHERE id = $1
+					RETURNING id;
+					`
+
+	err := db.QueryRow(sqlStatement, id, authTokenString).Scan(&id)
+
+	if err != nil {
+		fmt.Println("unable to store user new token in database")
+		return err
+	}
+
+	fmt.Println("token updated the user:", id)
 	return nil
 }

@@ -198,22 +198,23 @@ func IsAuth() gin.HandlerFunc {
 			return
 		}
 
-		valid := myJwt.CheckIfValid(authTokenString, refreshTokenString, csrf)
+		err = myJwt.CheckIfValid(authTokenString, refreshTokenString, csrf)
 
-		if valid {
-			user, err := myJwt.GetUserFromAuthTokenString(authTokenString)
-			if err != nil {
-				fmt.Println(err)
-				c.String(http.StatusInternalServerError, err.Error())
-				return
-			}
-
-			c.JSON(http.StatusOK, user)
-			return
-		} else {
+		if err != nil {
+			fmt.Println(err)
 			c.String(http.StatusUnauthorized, "unauthorized")
 			return
 		}
+
+		user, err := myJwt.GetUserFromAuthTokenString(authTokenString)
+		if err != nil {
+			fmt.Println(err)
+			c.String(http.StatusInternalServerError, err.Error())
+			return
+		}
+
+		c.JSON(http.StatusOK, user)
+		return
 	}
 }
 
