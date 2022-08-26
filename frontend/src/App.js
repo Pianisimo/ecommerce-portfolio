@@ -7,19 +7,26 @@ import SignInSignUp from "./pages/SignInSignUp/SignInSignUp";
 import {useDispatch, useSelector} from "react-redux";
 import {isAuth} from "./redux/user.slice";
 import Checkout from "./pages/Checkout/Checkout";
+import {useEffect} from "react";
 
 const App = () => {
     const dispatch = useDispatch();
-    const { currentUser, shouldFetchAuth } = useSelector(state => state.user);
+    const {currentUser} = useSelector(state => state.user);
 
-    if (shouldFetchAuth) {
-        dispatch(isAuth({})).then(value => {
-            if (value.type === 'users/isauth/rejected') {
-                console.log(value.payload)
+    useEffect(() => {
+        const dispatchFunc = async () => {
+            try {
+                const response = await dispatch(isAuth({}))
+                if (response.type === 'users/isauth/rejected') {
+                    console.log(response.payload)
+                }
+            } catch (e) {
+                console.log(e)
             }
-        })
-            .catch(reason => alert(reason))
-    }
+        }
+
+        dispatchFunc();
+    }, [])
 
     return (
         <div>

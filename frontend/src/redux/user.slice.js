@@ -3,7 +3,6 @@ import {BACKEND_URL} from "../index";
 
 const initialState = {
     currentUser: null,
-    shouldFetchAuth: true,
     loading: false
 }
 
@@ -15,11 +14,9 @@ const userSlice = createSlice({
         builder
             .addCase(isAuth.fulfilled, (state, action) => {
                 state.currentUser = action.payload;
-                state.shouldFetchAuth = false;
             })
             .addCase(isAuth.rejected, (state, action) => {
                 state.currentUser = null;
-                state.shouldFetchAuth = false;
             })
             .addCase(logOut.fulfilled, (state, action) => {
                 state.currentUser = null;

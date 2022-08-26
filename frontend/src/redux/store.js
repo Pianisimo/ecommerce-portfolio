@@ -23,10 +23,10 @@ export const store = configureStore({
     },
     middleware: (getDefaultMiddleware) => {
         if (process.env.NODE_ENV === 'development') {
-            return getDefaultMiddleware().concat(logger);
+            return getDefaultMiddleware({serializableCheck: false}).concat(logger);
         }
 
-        return getDefaultMiddleware();
+        return getDefaultMiddleware({serializableCheck: false});
     },
 })
 

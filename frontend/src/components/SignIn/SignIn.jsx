@@ -56,11 +56,11 @@ const SignIn = () => {
             <form onSubmit={handleSubmit}>
                 <FormInput handleChange={handleOnChange}
                            name='email' type='email' value={email}
-                           required autocomplete='email'
+                           required autoComplete='email'
                            label='email'/>
                 <FormInput handleChange={handleOnChange} name='password' type='password'
                            value={password}
-                           required autocomplete='current-password'
+                           required autoComplete='current-password'
                            label='password'/>
 
                 <div className='buttons'>
