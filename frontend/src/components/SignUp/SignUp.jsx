@@ -68,24 +68,24 @@ const SignUp = () => {
             <span>Sign up with your email and password</span>
             <form className='sign-up-form' onSubmit={handleSubmit}>
                 <FormInput handleChange={handleOnChange} name='email' type='email' value={email}
-                           required
+                           required autocomplete="email"
                            label='email'/>
                 <FormInput handleChange={handleOnChange} name='firstName' type='text'
                            value={firstName}
-                           required
+                           required autocomplete='given-name'
                            label='first name'/>
                 <FormInput handleChange={handleOnChange} name='lastName' type='text'
                            value={lastName}
-                           required
+                           required autocomplete='family-name'
                            label='last name'/>
                 <FormInput handleChange={handleOnChange} name='password' type='password'
                            value={password}
-                           required
+                           required autocomplete='new-password'
                            label='password'/>
 
                 <FormInput handleChange={handleOnChange} name='confirmPassword' type='password'
                            value={confirmPassword}
-                           required
+                           required autocomplete='new-password'
                            label='retype password'/>
                 <div className='buttons'>
                     {
